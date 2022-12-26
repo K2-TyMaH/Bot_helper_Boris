@@ -55,17 +55,7 @@ class Email(Field):
         #if len(new_email) > 
 
         self._value = new_email.group()
-        
-
-class Notes(UserDict):
-    # [["note1", ["tag1_1", "tag1_2"]], ["note2", ["#tag2_1", "tag2_2"]]]
-
-    def __init__(self):
-        self.notes = []   # буде складатися з класів Note
-
-    def add_tags(self, tags):
-        self.tags = tags
-       
+              
        
 class Note(Field):
     pass

@@ -12,7 +12,6 @@ class Record:
         self.emails = []
         self.tag = None
         self.note = None
-        self.notes =[]
 
 
     def add_phone(self, phone) -> str:
