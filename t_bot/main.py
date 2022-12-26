@@ -12,7 +12,7 @@ def main():
      
     except Exception:
         print("\nAn unexpected error has occurred...")
-        main()        
+        boris()        
 
     finally:
         address_book.save_address_book()           

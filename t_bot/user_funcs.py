@@ -252,23 +252,3 @@ def exit_func(*_)-> str:
     return exit("\nGood bye! \n\nSee you later!  ͡° ͜ʖ ͡° \n")
 
 
-@input_error
-def what_is_command(commands: list|dict, user_input: str) -> str:
-    count = 0
-    command_out = ""
-
-    for command in commands:
-
-        i = 0
-
-        for char_in, char_comm in zip(user_input, command):
-
-            if char_in == char_comm:
-                i += 1
-
-        if i > count:
-            count = i
-            command_out = command
-
-    return command_out
-
