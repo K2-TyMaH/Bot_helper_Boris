@@ -299,7 +299,7 @@ def sort_func(*_) -> str:
 @input_error
 def exit_func(*_)-> str:
     """The function close bot."""
-    return exit("\nGood bye! \nSee you later!  ͡° ͜ʖ ͡° \n")
+    return exit("\nGood bye! \n\nSee you later!  ͡° ͜ʖ ͡° \n")
 
 
 @input_error

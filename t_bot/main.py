@@ -1,7 +1,7 @@
 from __future__ import annotations
 from user_funcs import handler, EXIT_COMMANDS, exit_func
 from address_book import address_book
-from boris import boris
+from boris import boris, dobriy_den
 
 def main():
     """
@@ -12,6 +12,8 @@ def main():
     The bot terminates after the words "good bye", "exit", "close", "quit", "bye"
     """
     try: 
+        
+        dobriy_den()
         
         boris()
         

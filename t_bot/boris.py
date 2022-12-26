@@ -1,11 +1,13 @@
 from user_funcs import *
 from fields_for_record import Note
+from address_book import AddressBook
 
 FUNC_1_LIST = ("Add new contact", "Check contact", \
     "Find information in the book", "Show all book", "Show upcoming birthdays", \
         "Sort the garbage in my folder", "Exit")
-FUNC_2_LIST = ("Add information", "Change information", "Delete information", \
-    "Check how many days to birthday", "Remove contact from book", "Return to the previous menu")
+FUNC_2_LIST = ("Show information about this contact", "Add information", "Change information", \
+    "Delete information", "Check how many days to birthday", \
+        "Remove contact from book", "Return to the previous menu")
 ATTRIBUTES_LIST = ("Phone", "Birthday", "Email", "Tag", "Note", "Return to the previous menu")
 
 @input_error
@@ -27,10 +29,6 @@ def boris():
                 else:
                     print(f"\nWhat is it '{choosing_a}' ??? (o_O)?")
 
-    f1 = blue_color("Dobriy den everybody")
-    f2 = blue_color("Boris Jonson")
-    print(f"\n\n{f1}, I'm {f2} from London ♥ (ʘ‿ʘ) ♥")
-    print("\nOh, sorry, I'm joking ^▿^ I'm just a cool bot (◕‿◕) ")
     while True:
         f3 = blue_color("How can I help you? •௰•")
         print(f"\n{f3}")
@@ -90,7 +88,7 @@ def boris():
         
         else:
             print('')
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"What is it '{choosing}' ??? (o_O)?")
 
 
 @input_error
@@ -108,30 +106,54 @@ def main_comands(name, search_entry):
             break
         
         elif choosing == "1":
+            print(show_contact(search_entry))
+            break
+
+        elif choosing == "2":
             add_main_atributes(name, search_entry)
             break
         
-        elif choosing == "2":
+        elif choosing == "3":
             change_main_atributes(name, search_entry)
             break
         
-        elif choosing == "3":
+        elif choosing == "4":
             del_main_atributes(name, search_entry)
             break
 
-        elif choosing == "4":
+        elif choosing == "5":
             print(days_to_birth_func(name))
             break
 
-        elif choosing == "5":
+        elif choosing == "6":
             print(address_book.delete_record(name))
             break
 
-        elif choosing == "6":
+        elif choosing == "7":
             break
         
         else:
             print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+    
+    print(f"\nDo you wanna CHECK something else in the '{name.title()}' ? (•¿•)")
+    print("1 : Yes")
+    print("2 : No")
+    while True:    
+        
+        choosing_1 = input("\nChoose № >>> ")
+        
+        if not choosing_1:
+            break
+        
+        elif choosing_1 == "1":
+            main_comands(name, search_entry)
+            break
+        
+        elif choosing_1 == "2":
+            break
+
+        else:
+            print(f"\nWhat is it '{choosing_1}' ??? (o_O)?")
 
 @input_error
 def add_main_atributes(name, search_entry):
@@ -157,7 +179,7 @@ def add_main_atributes(name, search_entry):
                 break
         
         elif choosing == "2":
-            value = input(f"Write birthday for '{name.title()}' >>> ")
+            value = input(f"Write birthday for '{name.title()}' ('year.month.day') >>> ")
             print('')
             if value:
                 print(add_birth_func([name, value]))
@@ -232,7 +254,8 @@ def add_main_atributes(name, search_entry):
 
 @input_error
 def change_main_atributes(name, search_entry):
-    showing = dict(enumerate(ATTRIBUTES_LIST, 1))
+    showing = dict(enumerate(ATTRIBUTES_LIST, 2))
+    print("1 : Name")
     for k, v in showing.items():
         print(f"{k} : {v}")
     
@@ -245,6 +268,12 @@ def change_main_atributes(name, search_entry):
             break
         
         elif choosing == "1":
+            new_name = input(f"Write NEW NAME for '{name.title()}' >>> ")
+            print('')
+            print(edit_contact_name_func([name, new_name.lower()]))
+            boris()
+
+        elif choosing == "2":
             value = input(f"Write new phone for '{name.title()}' >>> ")
             print('')
             if value:
@@ -257,8 +286,8 @@ def change_main_atributes(name, search_entry):
             else:
                 break
         
-        elif choosing == "2":
-            value = input(f"Write new birthday for '{name.title()}' >>> ")
+        elif choosing == "3":
+            value = input(f"Write new birthday for '{name.title()}' ('year.month.day') >>> ")
             print('')
             if value:
                 if not search_entry.birthday:
@@ -270,7 +299,7 @@ def change_main_atributes(name, search_entry):
             else:
                 break
         
-        elif choosing == "3":
+        elif choosing == "4":
             value = input(f"Write new email for '{name.title()}' >>> ")
             print('')
             if value:
@@ -283,7 +312,7 @@ def change_main_atributes(name, search_entry):
             else:
                 break
 
-        elif choosing == "4":
+        elif choosing == "5":
             value = input(f"Write one #tag or #tags (separatet by ' ') for '{name.title()}' >>> ")
             print('')
             if value:
@@ -297,7 +326,7 @@ def change_main_atributes(name, search_entry):
             else:
                 break
 
-        elif choosing == "5":
+        elif choosing == "6":
             value = input(f"Write note for '{name.title()}' >>> ")
             print('')
             if value:
@@ -313,7 +342,7 @@ def change_main_atributes(name, search_entry):
             else:
                 break
         
-        elif choosing == "6":
+        elif choosing == "7":
             break
 
         else:
@@ -367,7 +396,7 @@ def del_main_atributes(name, search_entry):
 
         elif choosing == "4":
             print(f"\nDo you want to remove one or ALL! tags from the '{name.title()}' ? (•¿•)")
-            print("1 : Remove only one tag ")
+            print("\n1 : Remove only one tag ")
             print("2 : !!! Delete all tags !!! ")
             print("3 : I changed my mind, I don't want to delete anything")
             while True:     
@@ -376,7 +405,7 @@ def del_main_atributes(name, search_entry):
                 if not choosing_t:
                     break  
                 elif choosing_t == "1":
-                    search_entry.del_tag()
+                    print(search_entry.del_tag())
                     break           
                 elif choosing_t == "2":
                     print(search_entry.delete_tags())
@@ -423,19 +452,19 @@ def del_main_atributes(name, search_entry):
         else:
             print(f"\nWhat is it '{choosing_3}' ??? (o_O)?")
 
-# address_book.load_address_book()
-# try:
-#     boris()
-# finally:
-#     address_book.save_address_book()
 
 def blue_color(colorless_string): 
     painted_string = "\033[1m\033[34m{}\033[0m".format(colorless_string)
     return painted_string
 
-    
 
+def show_contact(c_info):
+    contact_info = AddressBook()
+    contact_info.add_record(c_info)
+    return contact_info
 
-
-
-
+def dobriy_den():
+    f1 = blue_color("Dobriy den everybody")
+    f2 = blue_color("Boris Jonson")
+    print(f"\n\n{f1}, I'm {f2} from London ♥ (ʘ‿ʘ) ♥")
+    print("\nOh, sorry, I'm joking ^▿^ I'm just a cool bot (◕‿◕) ")    

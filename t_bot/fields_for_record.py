@@ -51,7 +51,7 @@ class Email(Field):
         new_email = re.search(r'[a-zA-Z]+[\w.]+[@][a-zA-Z]+[.][a-zA-Z]{2,}', email)
 
         if not new_email:
-            raise ValueError(f"Email {email} is not valid.")
+            raise ValueError(f"Email '{email}' is not valid.")
         #if len(new_email) > 
 
         self._value = new_email.group()

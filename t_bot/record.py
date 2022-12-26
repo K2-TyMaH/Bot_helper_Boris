@@ -61,7 +61,8 @@ class Record:
             while True:
                 try:
                     print(f"What phone you want to remove? {showing}")
-                    choosing = input("Choose № of this phone (skip it if you don't want)>>> ")
+                    choosing = input("\nChoose № of this phone (skip it if you don't want)>>> ")
+                    print('')
                     if not choosing:
                         return f"You didn't remove any phone of < {self.name.value.title()} >"
                     choosing = int(choosing)
@@ -96,7 +97,8 @@ class Record:
             while True:
                 try:
                     print(f"What email you want to change? {showing}")
-                    choosing = input("Choose № of this email (skip it if you don't want)>>> ")
+                    choosing = input("\nChoose № of this email (skip it if you don't want)>>> ")
+                    print('')
                     if not choosing:
                         return f"You didn't change any email of < {self.name.value.title()} >"
                     choosing = int(choosing)
@@ -162,7 +164,7 @@ class Record:
         for item in list_new_note:
             new_note += f"{item} "
         old_note = self.note.value
-        note = old_note + new_note   
+        note = old_note + "\n" + new_note   
         self.note = Note(note)
 
         return f"The note < {new_note[:-1]} > was added to the contact < {self.name.value.title()} >."
@@ -211,35 +213,37 @@ class Record:
             while True:
                 try:
                     print(f"What tag do you want to remove? {showing}")
-                    choosing = input("Choose № of this tags (skip it if you  want press enter)>>> ")
+                    choosing = input("\nChoose № of this tag (or skip it)>>> ")
+                    print('')
                     if not choosing:
-                        print( f"You didn't remove any tags of < {self.tag.value} >")
+                        return f"\nYou didn't remove any tags of < {self.tag.value} >"
                     choosing = int(choosing)
                     self.tag.value.pop(choosing - 1)
-                    print( f"Tag < {showing[choosing]} > from < {old_tags} > was removed")
+                    return f"Tag < {showing[choosing]} > from < {old_tags} > was removed"
                     break
                 except ValueError:
-                    print(f"{choosing} is not a number!")
+                    print(f"'{choosing}' is not a number!")
                 except KeyError:
-                    print(f"{choosing} is out of range!")
+                    print(f"'{choosing}' is out of range!")
                 except IndexError:
-                    print(f"{choosing} is out of range!")
+                    print(f"'{choosing}' is out of range!")
         else:
-            return f' Tag {self.tag} is empty '
+            return f"Tag '{self.tag}' is empty"
 
 
     def add_birthday(self, birthday) -> str:
         '''Додає день народження.'''
         self.birthday = Birthday(birthday)
-        return f'Birthday was successfully added'
+        return f"Birthday '{self.birthday.value}' was successfully added"
 
     def change_birthday(self, new_birthday) -> str:
         '''Міняє день народження.'''
         if self.birthday:
+            old_birthday = self.birthday.value
             self.birthday = Birthday(new_birthday)
-            return f'Birthday has been successfully changed'
+            return f"Old birthday '{old_birthday}' has been successfully changed to '{self.birthday.value}' "
         else:
-            return f'The birthday hasn`t been added yet for this contact. Add first'
+            return f"The birthday hasn`t been added yet for this contact. Add first"
 
     def days_to_birthdays(self):
         '''Повертає кількість днів, яка залишилась до ДН конкретної людини.'''
