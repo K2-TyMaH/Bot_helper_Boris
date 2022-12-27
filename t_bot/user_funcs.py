@@ -12,12 +12,12 @@ def input_error(func):
         except ValueError as exception:
             ex_text = exception.args[0]
             if "not enough values to unpack" in ex_text:
-                return "Wrong format. Must be '{command} {name} {new_value}'."
+                return "Wrong format."
             elif "invalid literal for int" in ex_text:
                 return "You must enter an integer number."
             return ex_text    #"Incorrect data"
         except IndexError:
-            return "Wrong format. Must be '{command} {name} {value}'."
+            return "Wrong format."
         except TypeError:
             return "Unknown command or parameters, please try again."
         except AttributeError:
@@ -150,7 +150,7 @@ def del_birth_func(args: list) -> str:
     if record.birthday:
         return record.delete_birthday()
     else:
-        return f"The name {args[0].title()} isn't in AB or there is no birthday to delete."
+        return f"The name {args[0].title()} don't have birthday."
 
 @input_error
 def days_to_birth_func(args: list) -> str:

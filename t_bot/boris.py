@@ -338,7 +338,7 @@ def del_main_atributes(name, search_entry):
             break            
 
         elif choosing == "5":
-            if search_entry:
+            if search_entry and search_entry.note.value:
                 deleted_note = search_entry.note.value
                 search_entry.note = Note('')
                 print(color(f"The note '{deleted_note}' of contact '{name.title()}' was deleted.", "rb"))

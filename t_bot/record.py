@@ -190,9 +190,12 @@ class Record:
 
     def delete_tags(self) -> str:
         '''Видаляє всі тег.'''
-        deleted_tag = self.tag
-        self.tag = None
-        return f"The tag < {deleted_tag.value} > of contact < {self.name.value} > was deleted"
+        if self.tag:
+            deleted_tag = self.tag
+            self.tag = None
+            return f"The tag '{deleted_tag.value}' of contact '{self.name.value.title()}' was deleted"
+        else:
+            return f"Tags of '{self.name.value.title()}' is empty"
 
     def del_tag(self):
         '''Видаляє існуючий тег зі списку.'''
@@ -218,7 +221,7 @@ class Record:
                 except IndexError:
                     print(f"'{choosing}' is out of range!")
         else:
-            return f"Tag '{self.tag}' is empty"
+            return f"Tags of '{self.name.value.title()}' is empty"
 
 
     def add_birthday(self, birthday) -> str:
