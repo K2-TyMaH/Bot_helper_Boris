@@ -70,3 +70,6 @@ def line_func(record: Record) -> str:
     line += "\n|" + "-" * 117 + "|"
 
     return line
+
+
+

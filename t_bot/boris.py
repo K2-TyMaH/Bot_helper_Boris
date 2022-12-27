@@ -40,13 +40,14 @@ def boris():
                     print(color(f"\nDo you wanna add information about '{new_contact_name.title()}' ? {SMILE_LIST[8]}", "b"))
                     new_contact_name = new_contact_name.lower()
                     againer(add_main_atributes, new_contact_name, new_record)
+                    boris()
                 else:
                     print(color(f"\nThe contact with the name '{new_contact_name.title()}' already exists in the AB {SMILE_LIST[2]}", "rb"))
             else:
                 boris()
                 
         elif choosing == "2":
-            checker()
+            print(checker())
         
         elif choosing == "3":
             information = input("\nWhat are you looking for? >>> ")
@@ -467,11 +468,21 @@ def checker():
             name = input("Which contact would you like to check? >>> ")
             name = name.lower()
             search_entry = address_book.data.get(name)
+
             if search_entry:
                 print(color(f"\nWhat would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
                 main_comands(name, search_entry)
             else:
-                print(color(f"\nI didn't find any contact with name '{name.title()}' in AB {SMILE_LIST[2]}", "rb"))
+                for n, v in address_book.items():
+
+                    if (name in n.split() or
+                            name.title() in n.split()):
+                        search_entry = v
+                        print(color(f"What would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
+                        main_comands(n, search_entry)
+
+                return color(f"\nI didn't find any contact with name '{name.title()}' "
+                                     f"in AB {SMILE_LIST[2]}", "rb")
             break
         
         elif choosing == "2":

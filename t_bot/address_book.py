@@ -2,6 +2,8 @@ from collections import UserDict
 import pickle
 from record import Record
 from datetime import datetime
+from color_message import color_message
+from print_table import header_func, line_func
 
 
 class AddressBook(UserDict):
@@ -72,13 +74,12 @@ class AddressBook(UserDict):
         self.data[record.name.value] = record                 #.title()
         return f'New contact was added successfuly.'
 
-
     def search_in_contact_book(self, data) -> str:
-        '''Шукає співпадіння по цифрі в телефоні, по букві в імені, мейлу.'''
-        
-        output_book = AddressBook()
-        #data = data[0]
-        counter = 0        
+        '''Looks for mathches in names, phones, mails, tags, notes, birthdays.'''
+
+        table = header_func()
+        #data = data[0] if data else ""
+        counter = 0
 
         for name, record in self.data.items():
 
@@ -90,20 +91,22 @@ class AddressBook(UserDict):
             tag = " ".join(record.tag.value if record.tag else "")
             note = record.note.value if record.note else ""
 
-            if (data in name or
-                data in birthday or
-                data in emails or
-                data in phones or
-                data in tag or
-                data in note):
+            if (
+                    data.lower() in name or
+                    data.title() in name or
+                    data in birthday or
+                    data in emails or
+                    data in phones or
+                    data in tag or
+                    data in note
+            ):
+                table += line_func(record)
+                counter += 1
 
-                output_book.add_record(record)
-                counter += 1 
-        
         if counter < 1:
-            return f"I didn't find any '{data}' in AB."              
-        
-        return output_book   
+            return color_message(f"I didn't find any '{data}' in adress book.", "yellow")
+
+        return table
 
     def get_all_records(self) -> list:
         '''Повертає список всіх контактів із їхніми даними.'''
