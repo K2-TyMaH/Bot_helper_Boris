@@ -15,8 +15,8 @@ ATTRIBUTES_LIST = ("Phone", "Birthday", "Email", "Tag", "Note", "Return to the p
 def boris():
     
     while True:
-        helper = blue_color("How can I help you? •௰•")
-        enter = yellow_color("press Enter")
+        helper = color("How can I help you? •௰•", "bb")
+        enter = color("press Enter", "yb")
         print(f"\n{helper}")
         print(f"P.S. You can always {enter} if you want to skip selection {SMILE_LIST[0]}\n")
         
@@ -199,7 +199,7 @@ def add_main_atributes(name, search_entry):
 @input_error
 def change_main_atributes(name, search_entry):
     showing = dict(enumerate(ATTRIBUTES_LIST, 2))
-    print("1 : Name")
+    print(color("1", "b") + " : " + color("Name", "g"))
     show_comander(showing)
     
     while True:    
@@ -357,17 +357,9 @@ def del_main_atributes(name, search_entry):
     againer(del_main_atributes, name, search_entry)
 
 
-def blue_color(colorless_string): 
-    painted_string = "\033[1m\033[34m{}\033[0m".format(colorless_string)
-    return painted_string
 
-def yellow_color(colorless_string): 
-    painted_string = "\033[1m\033[33m{}\033[0m".format(colorless_string)
-    return painted_string
 
-def red_color(colorless_string):
-    painted_string = "\033[1m\033[31m{}\033[0m".format(colorless_string)
-    return painted_string
+
 
 def show_contact(c_info):
     contact_info = AddressBook()
@@ -375,17 +367,17 @@ def show_contact(c_info):
     return contact_info
 
 def dobriy_den():
-    f1 = blue_color("Dobriy den everybody")
-    f2 = yellow_color("Boris Jonson")
+    f1 = color("Dobriy den everybody", "bb")
+    f2 = color("Boris Jonson", "yb")
     print(f"\n\n{f1}, I'm {f2} from London {SMILE_LIST[4]}")
     print(f"\nOh, sorry, I'm joking {SMILE_LIST[5]} I'm just a cool bot {SMILE_LIST[6]} ")    
 
 def slava_ukraine():
-    slava = red_color("♥♥♥ SLAVA UKRAINE ♥♥♥")
+    slava = color("♥♥♥ SLAVA UKRAINI ♥♥♥", "rb")
     print(f"\n{slava}")
     line = "■■■■■■■■■■■■■■■■■■■■■■"
-    sky = blue_color(line)
-    wheat_field = yellow_color(line)
+    sky = color(line, 'b')
+    wheat_field = color(line, 'y')
     print(f"{sky}\n" * 4 + f"{wheat_field}\n" * 4)
     
 
@@ -417,7 +409,7 @@ def all_names():
             raise ValueError(f"Address book is empty")
 
 def againer(func, name, search_entry):
-    print("1 : Yes")
+    print(color("1", "b") + " : " + color("Name", "g"))
     print("2 : No")
     while True:    
         
@@ -476,17 +468,35 @@ def checker():
         else:
             print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
 
+def color(message: str, color: str) -> str:
+    '''bb - blue Bold, r - red, g - green, p - purple'''
+
+    color_code = {
+        "bb": "\033[1m\033[34m{}\033[0m",
+        "b": "\033[34m{}\033[0m",
+        "yb": "\033[1m\033[33m{}\033[0m",
+        "y": "\033[33m{}\033[0m",
+        "gb": "\033[1m\033[32m{}\033[0m",
+        "g": "\033[32m{}\033[0m",
+        "rb": "\033[1m\033[31m{}\033[0m",
+        "r": "\033[31m{}\033[0m",
+        "pb": "\033[1m\033[35m{}\033[0m",
+        "p": "\033[35m{}\033[0m"
+        }
+    return color_code[color].format(message)  
+
 def smile_list_funk():
     SMILE_LIST = ["(⌐■_■)", "♥", "(-_-)", "(o_O)", "♥ (ʘ‿ʘ) ♥", "^▿^", "(◕‿◕)", "(° ͜ʖ°)", "(•¿•)"]
     new_SMILE_LIST = []
     for smile in SMILE_LIST:
-        smile = red_color(smile)
+        smile = color(smile, "p")
         new_SMILE_LIST.append(smile)
     return new_SMILE_LIST
 SMILE_LIST = smile_list_funk()
 
 def show_comander(showing):
     for k, v in showing.items():
-            k = blue_color(k)
-            v = yellow_color(v)
+            k = color(k, "b")
+            v = color(v, "g")
             print(f"{k} : {v}")
+
