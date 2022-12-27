@@ -77,7 +77,7 @@ class AddressBook(UserDict):
         '''Шукає співпадіння по цифрі в телефоні, по букві в імені, мейлу.'''
         
         output_book = AddressBook()
-        data = data[0]
+        #data = data[0]
         counter = 0        
 
         for name, record in self.data.items():
@@ -101,7 +101,7 @@ class AddressBook(UserDict):
                 counter += 1 
         
         if counter < 1:
-            raise ValueError(f"I didn't find any {data} in AB.")              
+            return f"I didn't find any '{data}' in AB."              
         
         return output_book   
 

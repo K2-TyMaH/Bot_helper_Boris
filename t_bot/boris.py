@@ -36,12 +36,12 @@ def boris():
                 if new_record.name.value not in address_book.keys():
                     print('')
                     address_book.add_record(new_record)
-                    print(f"\nThe contact '{new_contact_name.title()}' successfully added {SMILE_LIST[1]}")
-                    print(f"\nDo you wanna add information about '{new_contact_name.title()}' ? {SMILE_LIST[8]}")
+                    print(color(f"\nThe contact '{new_contact_name.title()}' successfully added {SMILE_LIST[1]}", "g"))
+                    print(color(f"\nDo you wanna add information about '{new_contact_name.title()}' ? {SMILE_LIST[8]}", "b"))
                     new_contact_name = new_contact_name.lower()
                     againer(add_main_atributes, new_contact_name, new_record)
                 else:
-                    print(f"\nThe contact with the name '{new_contact_name.title()}' already exists in the AB {SMILE_LIST[2]}")
+                    print(color(f"\nThe contact with the name '{new_contact_name.title()}' already exists in the AB {SMILE_LIST[2]}", "rb"))
             else:
                 boris()
                 
@@ -60,18 +60,18 @@ def boris():
         elif choosing == "5":
             input_days = input("\nHow many days ahead should I look? >>> ")
             print('')
-            print(all_birth_func([input_days]))
+            print(color(all_birth_func([input_days]), "rb"))
 
         elif choosing == "6":
             print('')
-            print(sort_func())
+            print(color(sort_func(), "rb"))
         
         elif choosing == "7":
             exit_func()
         
         else:
             print('')
-            print(f"What is it '{choosing}' ??? {SMILE_LIST[3]}?")
+            print(color(f"What is it '{choosing}' ??? {SMILE_LIST[3]}?", "rb"))
 
 
 @input_error
@@ -104,20 +104,20 @@ def main_comands(name, search_entry):
             break
 
         elif choosing == "5":
-            print(days_to_birth_func(name))
+            print(color(days_to_birth_func(name), "rb"))
             break
 
         elif choosing == "6":
-            print(address_book.delete_record(name))
+            print(color(address_book.delete_record(name), "rb"))
             break
 
         elif choosing == "7":
             break
         
         else:
-            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
+            print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
     
-    print(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}")
+    print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
     againer(main_comands, name, search_entry)
 
 @input_error
@@ -137,7 +137,7 @@ def add_main_atributes(name, search_entry):
             value = input(f"Write phone for '{name.title()}' >>> ")
             print('')
             if value:
-                print(add_phone_func([name, value]))
+                print(color(add_phone_func([name, value]), "rb"))
                 break
             else:
                 break
@@ -146,7 +146,7 @@ def add_main_atributes(name, search_entry):
             value = input(f"Write birthday for '{name.title()}' ('year.month.day') >>> ")
             print('')
             if value:
-                print(add_birth_func([name, value]))
+                print(color(add_birth_func([name, value]), "rb"))
                 break
             else:
                 break
@@ -155,7 +155,7 @@ def add_main_atributes(name, search_entry):
             value = input(f"Write email for '{name.title()}' >>> ")
             print('')
             if value:
-                print(add_mail_func([name, value]))
+                print(color(add_mail_func([name, value]), "rb"))
                 break
             else:
                 break
@@ -165,7 +165,7 @@ def add_main_atributes(name, search_entry):
             print('')
             if value:
                 value = value.split(' ')
-                print(search_entry.add_tag(value))
+                print(color(search_entry.add_tag(value), "rb"))
                 break
             else:
                 break
@@ -175,13 +175,13 @@ def add_main_atributes(name, search_entry):
             print('')
             if value:
                 if not search_entry.note:
-                    print(add_note_func([name, value]))
+                    print(color(add_note_func([name, value]), "rb"))
                     break
                 else:
                     old_note = search_entry.note.value
-                    note = old_note + value   
+                    note = old_note + " " + value   
                     search_entry.note = Note(note)
-                    print(f"The note < {value} > was added to the contact < {name.title()} >.")
+                    print(color(f"The note '{value}' was added to the contact '{name.title()}'.", "rb"))
                     break
             else:
                 break
@@ -190,9 +190,9 @@ def add_main_atributes(name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
+            print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
 
-    print(f"\nDo you wanna add something else to the '{name.title()}' ? {SMILE_LIST[8]}")
+    print(color(f"\nDo you wanna ADD something else to the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
     againer(add_main_atributes, name, search_entry)
     
 
@@ -213,7 +213,7 @@ def change_main_atributes(name, search_entry):
         elif choosing == "1":
             new_name = input(f"Write NEW NAME for '{name.title()}' >>> ")
             print('')
-            print(edit_contact_name_func([name, new_name.lower()]))
+            print(color(edit_contact_name_func([name, new_name.lower()]), "rb"))
             boris()
 
         elif choosing == "2":
@@ -221,10 +221,10 @@ def change_main_atributes(name, search_entry):
             print('')
             if value:
                 if not search_entry.phones:
-                    print(add_phone_func([name, value]))
+                    print(color(add_phone_func([name, value]), "rb"))
                     break
                 else:
-                    print(change_phone_func([name, value]))
+                    print(color(change_phone_func([name, value]), "rb"))
                     break
             else:
                 break
@@ -234,10 +234,10 @@ def change_main_atributes(name, search_entry):
             print('')
             if value:
                 if not search_entry.birthday:
-                    print(add_birth_func([name, value]))
+                    print(color(add_birth_func([name, value]), "rb"))
                     break
                 else:
-                    print(change_birth_func([name, value]))
+                    print(color(change_birth_func([name, value]), "rb"))
                     break
             else:
                 break
@@ -247,10 +247,10 @@ def change_main_atributes(name, search_entry):
             print('')
             if value:
                 if not search_entry.emails:
-                    print(add_mail_func([name, value]))
+                    print(color(add_mail_func([name, value]), "rb"))
                     break
                 else:
-                    print(change_mail_func([name, value]))
+                    print(color(change_mail_func([name, value]), "rb"))
                     break
             else:
                 break
@@ -260,7 +260,7 @@ def change_main_atributes(name, search_entry):
             print('')
             if value:
                 value = value.split(' ')
-                print(search_entry.add_tag(value))
+                print(color(search_entry.add_tag(value), "rb"))
                 break
             else:
                 break
@@ -270,13 +270,13 @@ def change_main_atributes(name, search_entry):
             print('')
             if value:
                 if not search_entry.note:
-                    print(add_note_func([name, value]))
+                    print(color(add_note_func([name, value]), "rb"))
                     break
                 else:
                     old_note = search_entry.note.value
-                    note = old_note + value   
+                    note = old_note + " " + value   
                     search_entry.note = Note(note)
-                    print(f"The note < {value} > was added to the contact < {name.title()} >.")
+                    print(color(f"The note '{value}' was added to the contact '{name.title()}'.", "rb"))
                     break
             else:
                 break
@@ -287,7 +287,7 @@ def change_main_atributes(name, search_entry):
         else:
             print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
     
-    print(f"\nDo you wanna change something else to the '{name.title()}' ? {SMILE_LIST[8]}")
+    print(color(f"\nDo you wanna Change something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
     againer(change_main_atributes, name, search_entry)
 
 @input_error
@@ -304,62 +304,77 @@ def del_main_atributes(name, search_entry):
             break
         
         elif choosing == "1":
-            print(del_phone_func([name]))
+            print(color(del_phone_func([name]), "rb"))
             break
         
         elif choosing == "2":
-            print(del_birth_func([name]))
+            print(color(del_birth_func([name]), "rb"))
             break
         
         elif choosing == "3":
-            print(delete_mail_func([name]))
+            print(color(delete_mail_func([name]), "rb"))
             break
 
         elif choosing == "4":
-            print(f"\nDo you want to remove one or ALL! tags from the '{name.title()}' ? {SMILE_LIST[8]}")
-            print("\n1 : Remove only one tag ")
-            print("2 : !!! Delete all tags !!! ")
-            print("3 : I changed my mind, I don't want to delete anything")
+            print(color(f"\nDo you want to remove one or ALL! tags from the '{name.title()}' ? {SMILE_LIST[8]}", "b"))
+            print(color("\n1 : Remove only one tag ", "g"))
+            print(color("2 : !!! Delete all tags !!! ", "g"))
+            print(color("3 : I changed my mind, I don't want to delete anything", "g"))
             while True:     
                 choosing_t = input("\nChoose № >>> ")
                 print('') 
                 if not choosing_t:
                     break  
                 elif choosing_t == "1":
-                    print(search_entry.del_tag())
+                    print(color(search_entry.del_tag(), "r"))
                     break           
                 elif choosing_t == "2":
-                    print(search_entry.delete_tags())
+                    print(color(search_entry.delete_tags(), "rb"))
                     break
                 elif choosing_t == "3":
                     break
                 else:
-                    print(f"\nWhat is it '{choosing_t}' ??? {SMILE_LIST[3]}?")
+                    print(color(f"\nWhat is it '{choosing_t}' ??? {SMILE_LIST[3]}?", "r"))
             break            
 
         elif choosing == "5":
             if search_entry:
                 deleted_note = search_entry.note.value
                 search_entry.note = Note('')
-                print(f"The note '{deleted_note}' of contact '{name.title()}' was deleted.")
+                print(color(f"The note '{deleted_note}' of contact '{name.title()}' was deleted.", "rb"))
                 break
             else:
-                print(f"Note list of '{name.title()}' is already empty.")
+                print(color(f"Note list of '{name.title()}' is already empty.", "rb"))
                 break
         
         elif choosing == "6":
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
+            print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
     
-    print(f"\nDo you want to delete something else in '{name.title()}' ? {SMILE_LIST[8]}")
+    print(color(f"\nDo you want to DELETE something else in '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
     againer(del_main_atributes, name, search_entry)
 
 
 
 
+def color(message: str, color: str) -> str:
+    '''bb - blue Bold, r - red, g - green, p - purple'''
 
+    color_code = {
+        "bb": "\033[1m\033[34m{}\033[0m",
+        "b": "\033[34m{}\033[0m",
+        "yb": "\033[1m\033[33m{}\033[0m",
+        "y": "\033[33m{}\033[0m",
+        "gb": "\033[1m\033[32m{}\033[0m",
+        "g": "\033[32m{}\033[0m",
+        "rb": "\033[1m\033[31m{}\033[0m",
+        "r": "\033[31m{}\033[0m",
+        "pb": "\033[1m\033[35m{}\033[0m",
+        "p": "\033[35m{}\033[0m"
+        }
+    return color_code[color].format(message)  
 
 def show_contact(c_info):
     contact_info = AddressBook()
@@ -380,7 +395,14 @@ def slava_ukraine():
     wheat_field = color(line, 'y')
     print(f"{sky}\n" * 4 + f"{wheat_field}\n" * 4)
     
-
+def smile_list_funk():
+    SMILE_LIST = ["(⌐■_■)", "♥", "(-_-)", "(o_O)", "♥ (ʘ‿ʘ) ♥", "^▿^", "(◕‿◕)", "(° ͜ʖ°)", "(•¿•)"]
+    new_SMILE_LIST = []
+    for smile in SMILE_LIST:
+        smile = color(smile, "p")
+        new_SMILE_LIST.append(smile)
+    return new_SMILE_LIST
+SMILE_LIST = smile_list_funk()
 @input_error
 def all_names():
     
@@ -409,8 +431,8 @@ def all_names():
             raise ValueError(f"Address book is empty")
 
 def againer(func, name, search_entry):
-    print(color("1", "b") + " : " + color("Name", "g"))
-    print("2 : No")
+    print(color("1", "b") + " : " + color("Yes", "g"))
+    print(color("2", "b") + " : " + color("No", "r"))
     while True:    
         
         choosing = input("\nChoose № >>> ")
@@ -426,14 +448,14 @@ def againer(func, name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
+            print(color(f"\nWhat is it '{choosing}' ??? ", "rb") + color(f"{SMILE_LIST[3]}?"))
 
 @input_error
 def checker():
     
-    print("1 : I want to enter the desired name myself.")
-    print("2 : Select a name from the list: ")
-    print("3 : Return to preavious menu")
+    print(color("1", "b") + " : " + color("I want to enter the desired name myself.", "g"))
+    print(color("2", "b") + " : " + color("Select a name from the list: ", "g"))
+    print(color("3", "b") + " : " + color("Return to preavious menu", "g"))
     while True:    
         
         choosing = input("\nChoose № >>> ")
@@ -446,17 +468,17 @@ def checker():
             name = name.lower()
             search_entry = address_book.data.get(name)
             if search_entry:
-                print(f"\nWhat would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n")
+                print(color(f"\nWhat would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
                 main_comands(name, search_entry)
             else:
-                print(f"\nI didn't find any contact with name '{name.title()}' in AB {SMILE_LIST[2]}")
+                print(color(f"\nI didn't find any contact with name '{name.title()}' in AB {SMILE_LIST[2]}", "rb"))
             break
         
         elif choosing == "2":
             all_names_list = all_names()
             if all_names_list:
                 name, search_entry = all_names_list
-                print(f"What would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n")
+                print(color(f"What would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
                 main_comands(name, search_entry)
                 break
             else:
@@ -466,33 +488,7 @@ def checker():
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
-
-def color(message: str, color: str) -> str:
-    '''bb - blue Bold, r - red, g - green, p - purple'''
-
-    color_code = {
-        "bb": "\033[1m\033[34m{}\033[0m",
-        "b": "\033[34m{}\033[0m",
-        "yb": "\033[1m\033[33m{}\033[0m",
-        "y": "\033[33m{}\033[0m",
-        "gb": "\033[1m\033[32m{}\033[0m",
-        "g": "\033[32m{}\033[0m",
-        "rb": "\033[1m\033[31m{}\033[0m",
-        "r": "\033[31m{}\033[0m",
-        "pb": "\033[1m\033[35m{}\033[0m",
-        "p": "\033[35m{}\033[0m"
-        }
-    return color_code[color].format(message)  
-
-def smile_list_funk():
-    SMILE_LIST = ["(⌐■_■)", "♥", "(-_-)", "(o_O)", "♥ (ʘ‿ʘ) ♥", "^▿^", "(◕‿◕)", "(° ͜ʖ°)", "(•¿•)"]
-    new_SMILE_LIST = []
-    for smile in SMILE_LIST:
-        smile = color(smile, "p")
-        new_SMILE_LIST.append(smile)
-    return new_SMILE_LIST
-SMILE_LIST = smile_list_funk()
+            print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
 
 def show_comander(showing):
     for k, v in showing.items():
