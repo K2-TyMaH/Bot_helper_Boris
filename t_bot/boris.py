@@ -109,7 +109,7 @@ def main_comands(name, search_entry):
 
         elif choosing == "6":
             print(color(address_book.delete_record(name), "rb"))
-            break
+            boris()
 
         elif choosing == "7":
             break
