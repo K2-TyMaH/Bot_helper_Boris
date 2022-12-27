@@ -154,11 +154,11 @@ def del_birth_func(args: list) -> str:
 
 @input_error
 def days_to_birth_func(args: list) -> str:
-    record = address_book[args[0]]
+    record = address_book[args]
     if record.birthday != None:
-        return f"{args[0].title()}'s birthday will be in {record.days_to_birthdays()} days."
+        return f"{args.title()}'s birthday will be in '{record.days_to_birthdays()}' days."
     else:
-        return f"The name {args[0].title()} is not exist or this guy doesn't have a bday."
+        return f"'{args.title()}' doesn't have a birthday"
 
 
 @input_error

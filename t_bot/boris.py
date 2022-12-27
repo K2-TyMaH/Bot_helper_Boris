@@ -10,33 +10,18 @@ FUNC_2_LIST = ("Show information about this contact", "Add information", "Change
         "Remove contact from book", "Return to the previous menu")
 ATTRIBUTES_LIST = ("Phone", "Birthday", "Email", "Tag", "Note", "Return to the previous menu")
 
+
 @input_error
 def boris():
-    def fast_adding(new_contact_name, new_record):
-            print(f"\nDo you wanna add information about '{new_contact_name.title()}' ? (•¿•)")
-            print("1 : Yes")
-            print("2 : No")
-            new_contact_name = new_contact_name.lower()
-            while True:    
-                choosing_a = input("\nChoose № >>> ") 
-                if not choosing_a:
-                    break
-                elif choosing_a == "1":
-                    add_main_atributes(new_contact_name, new_record)
-                    break
-                elif choosing_a == "2":
-                    break
-                else:
-                    print(f"\nWhat is it '{choosing_a}' ??? (o_O)?")
-
+    
     while True:
-        f3 = blue_color("How can I help you? •௰•")
-        print(f"\n{f3}")
-        print("P.S. You always can skip any comand if you want to exit (⌐■_■)\n")
+        helper = blue_color("How can I help you? •௰•")
+        enter = yellow_color("press Enter")
+        print(f"\n{helper}")
+        print(f"P.S. You can always {enter} if you want to skip selection {SMILE_LIST[0]}\n")
         
         showing = dict(enumerate(FUNC_1_LIST, 1))
-        for k, v in showing.items():
-            print(f"{k} : {v}")
+        show_comander(showing)
         choosing = input("\nChoose № >>> ")
         print('')
         
@@ -46,24 +31,22 @@ def boris():
         elif choosing == "1":
             new_contact_name = input("\nWrite name of your new contact >>> ")
             print('')
-            new_record = Record(new_contact_name.lower())
-            if new_record.name.value not in address_book.keys():
-                print('')
-                address_book.add_record(new_record)
-                print(f"\nThe contact '{new_contact_name.title()}' successfully added ♥")
-                fast_adding(new_contact_name, new_record)
+            if new_contact_name:
+                new_record = Record(new_contact_name.lower())
+                if new_record.name.value not in address_book.keys():
+                    print('')
+                    address_book.add_record(new_record)
+                    print(f"\nThe contact '{new_contact_name.title()}' successfully added {SMILE_LIST[1]}")
+                    print(f"\nDo you wanna add information about '{new_contact_name.title()}' ? {SMILE_LIST[8]}")
+                    new_contact_name = new_contact_name.lower()
+                    againer(add_main_atributes, new_contact_name, new_record)
+                else:
+                    print(f"\nThe contact with the name '{new_contact_name.title()}' already exists in the AB {SMILE_LIST[2]}")
             else:
-                print(f"\nThe contact with the name '{new_contact_name.title()}' already exists in the AB (-_-)")
-        
+                boris()
+                
         elif choosing == "2":
-            name = input("\nWhich contact would you like to check? >>> ")
-            name = name.lower()
-            search_entry = address_book.data.get(name)
-            if search_entry:
-                print(f"\nWhat would you like to do with contact '{name.title()}' (° ͜ʖ°)\n")
-                main_comands(name, search_entry)
-            else:
-                print(f"\nI didn't find any contact with name '{name.title()}' in AB (-_-)")
+            checker()
         
         elif choosing == "3":
             information = input("\nWhat are you looking for? >>> ")
@@ -88,14 +71,13 @@ def boris():
         
         else:
             print('')
-            print(f"What is it '{choosing}' ??? (o_O)?")
+            print(f"What is it '{choosing}' ??? {SMILE_LIST[3]}?")
 
 
 @input_error
 def main_comands(name, search_entry):
     showing = dict(enumerate(FUNC_2_LIST, 1))
-    for k, v in showing.items():
-        print(f"{k} : {v}")
+    show_comander(showing)
     
     while True:    
         
@@ -133,33 +115,15 @@ def main_comands(name, search_entry):
             break
         
         else:
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
     
-    print(f"\nDo you wanna CHECK something else in the '{name.title()}' ? (•¿•)")
-    print("1 : Yes")
-    print("2 : No")
-    while True:    
-        
-        choosing_1 = input("\nChoose № >>> ")
-        
-        if not choosing_1:
-            break
-        
-        elif choosing_1 == "1":
-            main_comands(name, search_entry)
-            break
-        
-        elif choosing_1 == "2":
-            break
-
-        else:
-            print(f"\nWhat is it '{choosing_1}' ??? (o_O)?")
+    print(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}")
+    againer(main_comands, name, search_entry)
 
 @input_error
 def add_main_atributes(name, search_entry):
     showing = dict(enumerate(ATTRIBUTES_LIST, 1))
-    for k, v in showing.items():
-        print(f"{k} : {v}")
+    show_comander(showing)
     
     while True:    
         
@@ -200,13 +164,9 @@ def add_main_atributes(name, search_entry):
             value = input(f"Write one #tag or #tags (separatet by ' ') for '{name.title()}' >>> ")
             print('')
             if value:
-                if not search_entry.tag:
-                    print(add_tag_func([name, value]))
-                    break
-                else:
-                    value = value.split(' ')
-                    search_entry.change_tag(value)
-                    break
+                value = value.split(' ')
+                print(search_entry.add_tag(value))
+                break
             else:
                 break
 
@@ -230,34 +190,17 @@ def add_main_atributes(name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
 
-    print(f"\nDo you wanna add something else to the '{name.title()}' ? (•¿•)")
-    print("1 : Yes")
-    print("2 : No")
-    while True:    
-        
-        choosing_2 = input("\nChoose № >>> ")
-        
-        if not choosing_2:
-            break
-        
-        elif choosing_2 == "1":
-            add_main_atributes(name, search_entry)
-            break
-        
-        elif choosing_2 == "2":
-            break
-
-        else:
-            print(f"\nWhat is it '{choosing_2}' ??? (o_O)?")
+    print(f"\nDo you wanna add something else to the '{name.title()}' ? {SMILE_LIST[8]}")
+    againer(add_main_atributes, name, search_entry)
+    
 
 @input_error
 def change_main_atributes(name, search_entry):
     showing = dict(enumerate(ATTRIBUTES_LIST, 2))
     print("1 : Name")
-    for k, v in showing.items():
-        print(f"{k} : {v}")
+    show_comander(showing)
     
     while True:    
         
@@ -316,13 +259,9 @@ def change_main_atributes(name, search_entry):
             value = input(f"Write one #tag or #tags (separatet by ' ') for '{name.title()}' >>> ")
             print('')
             if value:
-                if not search_entry.tag:
-                    print(add_tag_func([name, value]))
-                    break
-                else:
-                    value = value.split(' ')
-                    search_entry.change_tag(value)
-                    break
+                value = value.split(' ')
+                print(search_entry.add_tag(value))
+                break
             else:
                 break
 
@@ -346,33 +285,15 @@ def change_main_atributes(name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
     
-    print(f"\nDo you wanna change something else to the '{name.title()}' ? (•¿•)")
-    print("1 : Yes")
-    print("2 : No")
-    while True:    
-        
-        choosing_2 = input("\nChoose № >>> ")
-        
-        if not choosing_2:
-            break
-        
-        elif choosing_2 == "1":
-            change_main_atributes(name, search_entry)
-            break
-        
-        elif choosing_2 == "2":
-            break
-
-        else:
-            print(f"\nWhat is it '{choosing_2}' ??? (o_O)?")
+    print(f"\nDo you wanna change something else to the '{name.title()}' ? {SMILE_LIST[8]}")
+    againer(change_main_atributes, name, search_entry)
 
 @input_error
 def del_main_atributes(name, search_entry):
     showing = dict(enumerate(ATTRIBUTES_LIST, 1))
-    for k, v in showing.items():
-        print(f"{k} : {v}")
+    show_comander(showing)
     
     while True:    
         
@@ -395,7 +316,7 @@ def del_main_atributes(name, search_entry):
             break
 
         elif choosing == "4":
-            print(f"\nDo you want to remove one or ALL! tags from the '{name.title()}' ? (•¿•)")
+            print(f"\nDo you want to remove one or ALL! tags from the '{name.title()}' ? {SMILE_LIST[8]}")
             print("\n1 : Remove only one tag ")
             print("2 : !!! Delete all tags !!! ")
             print("3 : I changed my mind, I don't want to delete anything")
@@ -413,7 +334,7 @@ def del_main_atributes(name, search_entry):
                 elif choosing_t == "3":
                     break
                 else:
-                    print(f"\nWhat is it '{choosing_t}' ??? (o_O)?")
+                    print(f"\nWhat is it '{choosing_t}' ??? {SMILE_LIST[3]}?")
             break            
 
         elif choosing == "5":
@@ -430,33 +351,23 @@ def del_main_atributes(name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
     
-    print(f"\nDo you want to delete something else in '{name.title()}' ? (•¿•)")
-    print("1 : Yes")
-    print("2 : No")
-    while True:    
-        
-        choosing_3 = input("\nChoose № >>> ")
-        
-        if not choosing_3:
-            break
-        
-        elif choosing_3 == "1":
-            del_main_atributes(name, search_entry)
-            break
-        
-        elif choosing_3 == "2":
-            break
-
-        else:
-            print(f"\nWhat is it '{choosing_3}' ??? (o_O)?")
+    print(f"\nDo you want to delete something else in '{name.title()}' ? {SMILE_LIST[8]}")
+    againer(del_main_atributes, name, search_entry)
 
 
 def blue_color(colorless_string): 
     painted_string = "\033[1m\033[34m{}\033[0m".format(colorless_string)
     return painted_string
 
+def yellow_color(colorless_string): 
+    painted_string = "\033[1m\033[33m{}\033[0m".format(colorless_string)
+    return painted_string
+
+def red_color(colorless_string):
+    painted_string = "\033[1m\033[31m{}\033[0m".format(colorless_string)
+    return painted_string
 
 def show_contact(c_info):
     contact_info = AddressBook()
@@ -465,9 +376,18 @@ def show_contact(c_info):
 
 def dobriy_den():
     f1 = blue_color("Dobriy den everybody")
-    f2 = blue_color("Boris Jonson")
-    print(f"\n\n{f1}, I'm {f2} from London ♥ (ʘ‿ʘ) ♥")
-    print("\nOh, sorry, I'm joking ^▿^ I'm just a cool bot (◕‿◕) ")    
+    f2 = yellow_color("Boris Jonson")
+    print(f"\n\n{f1}, I'm {f2} from London {SMILE_LIST[4]}")
+    print(f"\nOh, sorry, I'm joking {SMILE_LIST[5]} I'm just a cool bot {SMILE_LIST[6]} ")    
+
+def slava_ukraine():
+    slava = red_color("♥♥♥ SLAVA UKRAINE ♥♥♥")
+    print(f"\n{slava}")
+    line = "■■■■■■■■■■■■■■■■■■■■■■"
+    sky = blue_color(line)
+    wheat_field = yellow_color(line)
+    print(f"{sky}\n" * 4 + f"{wheat_field}\n" * 4)
+    
 
 @input_error
 def all_names():
@@ -477,8 +397,7 @@ def all_names():
             showing = dict(enumerate(all_names, 1))
             while True:
                 try:
-                    for k, v in showing.items():
-                        print(f"{k} : {v}")
+                    show_comander(showing)
                     choosing = input("\nChoose № of this name (or skip it) >>> ")
                     print('')
                     if not choosing:
@@ -515,7 +434,59 @@ def againer(func, name, search_entry):
             break
 
         else:
-            print(f"\nWhat is it '{choosing}' ??? (o_O)?")
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
 
+@input_error
 def checker():
-    pass
+    
+    print("1 : I want to enter the desired name myself.")
+    print("2 : Select a name from the list: ")
+    print("3 : Return to preavious menu")
+    while True:    
+        
+        choosing = input("\nChoose № >>> ")
+        print('')
+        if not choosing:
+            break
+        
+        elif choosing == "1":
+            name = input("Which contact would you like to check? >>> ")
+            name = name.lower()
+            search_entry = address_book.data.get(name)
+            if search_entry:
+                print(f"\nWhat would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n")
+                main_comands(name, search_entry)
+            else:
+                print(f"\nI didn't find any contact with name '{name.title()}' in AB {SMILE_LIST[2]}")
+            break
+        
+        elif choosing == "2":
+            all_names_list = all_names()
+            if all_names_list:
+                name, search_entry = all_names_list
+                print(f"What would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n")
+                main_comands(name, search_entry)
+                break
+            else:
+                break
+
+        if choosing == "3":
+            break
+
+        else:
+            print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
+
+def smile_list_funk():
+    SMILE_LIST = ["(⌐■_■)", "♥", "(-_-)", "(o_O)", "♥ (ʘ‿ʘ) ♥", "^▿^", "(◕‿◕)", "(° ͜ʖ°)", "(•¿•)"]
+    new_SMILE_LIST = []
+    for smile in SMILE_LIST:
+        smile = red_color(smile)
+        new_SMILE_LIST.append(smile)
+    return new_SMILE_LIST
+SMILE_LIST = smile_list_funk()
+
+def show_comander(showing):
+    for k, v in showing.items():
+            k = blue_color(k)
+            v = yellow_color(v)
+            print(f"{k} : {v}")

@@ -175,28 +175,18 @@ class Record:
         self.note = None
         return f'The note < {deleted_note} > of contact < {self.name.value} > was deleted.'
 
-    def add_tag(self, list_tag) -> str:
-        '''Створює теги. Один Раз при виклику та кожного разу післі Delete tags '''
-        if not list_tag:
-            return f'Tag is not input, please type again'
-        elif not self.tag:
-            tag_list2 = []
-            for tag in list_tag:
-                tag_list2.append(tag)
-            #tags_list = tag[0].split(',') # [#one,#two]
-            self.tag = Tag(tag_list2)
-            return f"The tag < {tag_list2} > was added to the contact < {self.name.value} >."
-        else:
-            return f'Tag is existed. Cannot be added'
-
-    def change_tag(self, new_tag_list):
+    def add_tag(self, new_tag_list):
         '''Додає теги до існуючиго списку тегів.'''
-        old_tag = self.tag
         if self.tag:
+            old_tag = self.tag
             self.tag = Tag(old_tag.value + new_tag_list)
-            print(f'The new tag {new_tag_list} has been added to old one {old_tag.value}')
+            return f'The new tag {new_tag_list} has been added to old one {old_tag.value}'
         else:
-            print(f'The tag has been added yet for this contact. Add first')
+            tag_list = []
+            for tag in new_tag_list:
+                tag_list.append(tag)
+            self.tag = Tag(tag_list)
+            return f"The tag '{tag_list}' was added to the contact '{self.name.value}'"
 
     def delete_tags(self) -> str:
         '''Видаляє всі тег.'''

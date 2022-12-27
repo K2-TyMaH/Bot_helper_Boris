@@ -1,6 +1,6 @@
 from __future__ import annotations
 from address_book import address_book
-from boris import boris, dobriy_den
+from boris import boris, dobriy_den, slava_ukraine
 
 def main():
     """
@@ -8,6 +8,7 @@ def main():
     """
     try:        
         dobriy_den()
+        slava_ukraine()
         boris()
      
     except Exception:
