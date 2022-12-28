@@ -383,15 +383,15 @@ def show_contact(c_info):
     return contact_info
 
 def dobriy_den():
-    f1 = color("Dobriy den everybody", "bb")
+    f1 = color("Dobriy den, everybody!", "bb")
     f2 = color("Boris Jonson", "yb")
-    print(f"\n\n{f1}, I'm {f2} from London {SMILE_LIST[4]}")
-    print(f"\nOh, sorry, I'm joking {SMILE_LIST[5]} I'm just a cool bot {SMILE_LIST[6]} ")    
+    print(f"\n\n{f1} I'm {f2} from London {SMILE_LIST[4]}")
+    print(f"\nOh, sorry, I'm joking {SMILE_LIST[5]} I'm just a cool bot from Ukraine {SMILE_LIST[6]} ")
 
 def slava_ukraine():
-    slava = color("♥♥♥ SLAVA UKRAINI ♥♥♥", "rb")
+    slava = color("♥♥♥♥♥♥♥ SLAVA UKRAINI ♥♥♥♥♥♥♥", "rb")
     print(f"\n{slava}")
-    line = "■■■■■■■■■■■■■■■■■■■■■■"
+    line = "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
     sky = color(line, 'b')
     wheat_field = color(line, 'y')
     print(f"{sky}\n" * 4 + f"{wheat_field}\n" * 4)
