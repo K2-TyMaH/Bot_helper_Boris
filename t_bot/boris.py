@@ -89,7 +89,7 @@ def main_comands(name, search_entry):
             boris()
         
         elif choosing == "1":
-            print(show_contact(search_entry))
+            show_contact(name)
             break
 
         elif choosing == "2":
@@ -391,9 +391,7 @@ def color(message: str, color: str) -> str:
     return color_code[color].format(message)  
 
 def show_contact(c_info):
-    contact_info = AddressBook()
-    contact_info.add_record(c_info)
-    return contact_info
+    print(address_book.search_in_contact_book(c_info))
 
 def dobriy_den():
     f1 = color("Dobriy den, everybody!", "bb")
@@ -404,7 +402,7 @@ def dobriy_den():
 def slava_ukraine():
     slava = color("♥♥♥♥♥♥♥ SLAVA UKRAINI ♥♥♥♥♥♥♥", "rb")
     print(f"\n{slava}")
-    line = "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
+    line = "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"
     sky = color(line, 'b')
     wheat_field = color(line, 'y')
     print(f"{sky}\n" * 4 + f"{wheat_field}\n" * 4)
