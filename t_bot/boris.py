@@ -7,7 +7,7 @@ FUNC_1_LIST = ("Add new contact", "Check contact", \
         "Sort the garbage in my folder", "Exit")
 FUNC_2_LIST = ("Show information about this contact", "Add information", "Change information", \
     "Delete information", "Check how many days to birthday", \
-        "Remove contact from book", "Return to the previous menu")
+        "Remove contact from book", "Return to the main menu")
 ATTRIBUTES_LIST = ("Phone", "Birthday", "Email", "Tag", "Note", "Return to the previous menu")
 
 
@@ -86,7 +86,7 @@ def main_comands(name, search_entry):
         print('')
         
         if not choosing:
-            break
+            boris()
         
         elif choosing == "1":
             print(show_contact(search_entry))
@@ -113,13 +113,14 @@ def main_comands(name, search_entry):
             boris()
 
         elif choosing == "7":
-            break
+            boris()
         
         else:
             print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
     
     print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
     againer(main_comands, name, search_entry)
+    boris()
 
 @input_error
 def add_main_atributes(name, search_entry):
@@ -132,7 +133,9 @@ def add_main_atributes(name, search_entry):
         print('')
         
         if not choosing:
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
         
         elif choosing == "1":
             value = input(f"Write phone for '{name.title()}' >>> ")
@@ -188,7 +191,9 @@ def add_main_atributes(name, search_entry):
                 break
         
         elif choosing == "6":
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
 
         else:
             print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
@@ -209,7 +214,9 @@ def change_main_atributes(name, search_entry):
         print('')
         
         if not choosing:
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
         
         elif choosing == "1":
             new_name = input(f"Write NEW NAME for '{name.title()}' >>> ")
@@ -283,7 +290,9 @@ def change_main_atributes(name, search_entry):
                 break
         
         elif choosing == "7":
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
 
         else:
             print(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?")
@@ -302,7 +311,9 @@ def del_main_atributes(name, search_entry):
         print('')
         
         if not choosing:
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
         
         elif choosing == "1":
             print(color(del_phone_func([name]), "rb"))
@@ -349,7 +360,9 @@ def del_main_atributes(name, search_entry):
                 break
         
         elif choosing == "6":
-            break
+            print(color(f"\nDo you wanna CHECK something else in the '{name.title()}' ? {SMILE_LIST[8]}", "gb"))
+            againer(main_comands, name, search_entry)
+            boris()
 
         else:
             print(color(f"\nWhat is it '{choosing}' ??? {SMILE_LIST[3]}?", "r"))
@@ -473,13 +486,15 @@ def checker():
                 print(color(f"\nWhat would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
                 main_comands(name, search_entry)
             else:
+                find_names_list = []
                 for n, v in address_book.items():
+                    if name in n.split():
+                        find_names_list.append((n, v))
 
-                    if (name in n.split() or
-                            name.title() in n.split()):
-                        search_entry = v
-                        print(color(f"What would you like to do with contact '{name.title()}' {SMILE_LIST[8]}\n", "bb"))
-                        main_comands(n, search_entry)
+                if find_names_list:
+                    for item in find_names_list:
+                        print(color(f"\nDo you mean contact '{item[0].title()}' {SMILE_LIST[8]}\n?", "bb"))
+                        againer(main_comands, item[0], item[1])
 
                 return color(f"\nI didn't find any contact with name '{name.title()}' "
                                      f"in AB {SMILE_LIST[2]}", "rb")
